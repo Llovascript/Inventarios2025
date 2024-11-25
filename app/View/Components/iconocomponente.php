@@ -19,6 +19,6 @@ class ImageComponent extends Component
 
     public function render()
     {
-        return view('components.image-component');
+        return view('components.iconocomponente');
     }
 }
