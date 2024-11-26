@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ asset('css/globals.css') }}">
-  <link rel="stylesheet" href="{{ asset('storage/css/css.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/dbestilos.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <script src="//unpkg.com/alpinejs" defer></script>
   <title>Dashboard Administrador</title>
@@ -18,7 +18,7 @@
          
         </div>
         <div class="overlap-group">
-          <img class="image" src="{{ asset('storage/img/LOGO.png') }}" alt="Logo Universidad">
+          <img class="image" src="{{ asset('img/LOGO.png') }}" alt="Logo Universidad">
           <h1 class="heading">Universidad Politécnica <br>De Querétaro</h1>
         </div>
       </div>
@@ -91,7 +91,7 @@
 
           @foreach ($menuItems as $item)
           <div class="menu-item" onclick="window.location.href='{{ route($item['route']) }}'">
-            <img src="{{ asset('storage/img/iconosdashboard/' . $item['img']) }}" alt="{{ $item['label'] }}" class="menu-image">
+            <img src="{{ asset('img/iconosdashboard/' . $item['img']) }}" alt="{{ $item['label'] }}" class="menu-image">
             <span class="label">{{ $item['label'] }}</span>
           </div>
           @endforeach

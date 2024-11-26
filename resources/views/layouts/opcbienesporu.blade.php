@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{{ asset('css/globals.css') }}" />
-    <link rel="stylesheet" href="{{ asset('storage/css/css.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/dbestilos.css') }}" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   </head>
