@@ -32,7 +32,7 @@ return [
     'string' => 'El campo :attribute debe tener entre :min y :max caracteres.',
 ],
 'boolean' => 'El campo :attribute debe ser verdadero o falso.',
-'confirmed' => 'La confirmación de :attribute no coincide.',
+'confirmed' => 'La confirmación no coincide.',
 'date' => 'El campo :attribute debe ser una fecha válida.',
 'email' => 'El campo :attribute debe ser una dirección de correo válida.',
 'filled' => 'El campo :attribute debe tener un valor.',
@@ -50,7 +50,7 @@ return [
     'string' => 'El campo :attribute debe tener al menos :min caracteres.',
 ],
 'required' => 'El campo :attribute es obligatorio.',
-'unique' => 'El campo :attribute ya ha sido registrado.',
+'unique' => 'El numero de empleado ya ha sido registrado.',
 'url' => 'El campo :attribute debe ser una URL válida.',
 
 
