@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="{{ asset('css/globals.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/dbestilos.css') }}" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -11,12 +10,9 @@
     <div class="usuario-AC-principal">
       <div class="div">
         <div class="frame">
-          <div class="overlap">
-            <img class="line" src="{{ asset('img/line-1.svg') }}" />
-            <img class="img" src="{{ asset('img/line-2.svg') }}" />
-          </div>
+         
           <div class="overlap-group">
-            <img class="image" src="{{ asset('storage/img/LOGO.png') }}" />
+            <img class="image" src="{{ asset('img/LOGO.png') }}" />
             <div class="heading">Universidad Politécnica <br />De Querétaro</div>
           </div>
           <!-- Incluye el menú desplegable de configuraciones de tu navegación -->
@@ -62,7 +58,7 @@
           <div class="frameiconos">
             <div class="grid-container">
               <div class="menu-item">
-                <img src="{{ asset('storage/img/iconosdashboard/ajustes-de-engranajes.png') }}" alt="Generales" class="menu-image">
+                <img src="{{ asset('img/iconosdashboard/ajustes-de-engranajes.png') }}" alt="Generales" class="menu-image">
                 <span class="label">Bienes Por Ubicación</span>
                 
               </div>

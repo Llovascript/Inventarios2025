@@ -10,10 +10,7 @@
     <div class="usuario-AC-principal">
       <div class="div">
         <div class="frame">
-          <div class="overlap">
-            <img class="line" src="{{ asset('img/line-1.svg') }}" />
-            <img class="img" src="{{ asset('img/line-2.svg') }}" />
-          </div>
+          
           <div class="overlap-group">
             <img class="image" src="{{ asset('img/LOGO.png') }}" />
             <div class="heading">Universidad Politécnica <br />De Querétaro</div>
@@ -52,7 +49,7 @@
         </div>
           <div class="text-wrapper-2">
               --Generales
-            <div class="linea">.<div class="linea2">.</div></div>
+           
           </div>
         </div>
         <div class="overlap-2">
