@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Oswald:wght@200..700&family=Poppins:wght@400;500;600;700&family=Sedan&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", serif;
+}
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(#F1F3FF, #CBD4FF);
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #151830;
+    transition: all 0.4s ease;
+}
+
+.sidebar.collapsed{
+    width: 85px;
+}
+
+.sidebar .sidebar-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 20px;
+    position: relative;
+}
+
+.sidebar-header .header-logo img{
+    height: 70px;
+    width: 70px;
+    display: block;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.sidebar-header .sidebar-toggler{
+    position: absolute;
+    right: 20px;
+    height: 35px;
+    width: 35px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #eef2ff;
+    transition: 0.4s ease;
+}
+
+.sidebar-header .sidebar-toggler:hover{
+    background: #d9e1fd;
+}
+
+.sidebar.collapsed .sidebar-toggler{
+    transform: translate(-4px, 65px);
+}
+
+.sidebar-header .sidebar-toggler span{
+    font-size: 1.75rem;
+    transition: 0.6s ease;
+}
+
+.sidebar.collapsed .sidebar-toggler span{
+    transform: rotate(180deg);
+}
+
+.sidebar-nav .nav-list{
+    list-style: none;
+    display: flex;
+    gap: 4px;
+    padding: 0 15px;
+    flex-direction: column;
+    transform: translateY(15px);
+    transition: 0.4s ease;
+
+}
+
+.sidebar.collapsed .sidebar-nav .primary-nav{
+    transform: translateY(65px);
+}
+
+.sidebar-nav .nav-item .nav-link{
+    color: #fff;
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+    padding: 11px 15px;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid #151830;
+    transition: 0.4s ease;
+}
+
+.sidebar-nav .nav-item:hover > .nav-link{
+    background: #eef2ff;
+    color: #8c2437;
+}
+
+.sidebar-nav .nav-link .nab-label{
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .nav-link .nab-label{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar-nav .secondary-nav{
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    background: #151830;
+}
