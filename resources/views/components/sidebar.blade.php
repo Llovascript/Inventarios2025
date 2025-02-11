@@ -9,6 +9,10 @@
     @vite(['resources/css/sidebar.css'])
 </head>
 <body>
+    <button class="sidebar-menu-button">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
+
     <aside class="sidebar">
         <header class="sidebar-header">
             <a href="#" class="header-logo">

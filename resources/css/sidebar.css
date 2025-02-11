@@ -20,7 +20,9 @@ body{
     height: 100vh;
     background: #151830;
     transition: all 0.4s ease;
+    z-index: 999;
 }
+
 
 .sidebar.collapsed{
     width: 85px;
@@ -55,6 +57,7 @@ body{
     border-radius: 8px;
     background: #eef2ff;
     transition: 0.4s ease;
+    z-index: 1000;
 }
 
 .sidebar-header .sidebar-toggler:hover{
@@ -89,6 +92,8 @@ body{
     transform: translateY(65px);
 }
 
+
+
 .sidebar-nav .nav-item .nav-link{
     color: #fff;
     display: flex;
@@ -121,4 +126,31 @@ body{
     bottom: 30px;
     width: 100%;
     background: #151830;
+}
+
+.sidebar-menu-button{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar-menu-button{
+        display: block;
+        position: fixed;
+        left: 20px;
+        top: 20px;
+        border: none;
+        color: #151830;
+        background: none;
+        cursor: pointer;
+    }
+
+    .sidebar-menu-button span{
+        font-size: 1.8rem;
+        
+    }
+
+    .sidebar.collapsed{
+        width: 260px;
+        left: -260px;
+    }
 }

@@ -1,18 +1,15 @@
-<x-app-layout>
-
-    <div class="flex">
-        <!-- Sidebar -->
-        <x-sidebar />
-
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/topbar.css', 'resources/js/topbar.js', 'resources/css/sidebar.css', 'resources/js/sidebar.js'])
+<div class="flex min-h-screen">
+    <x-sidebar />
+    
+    <div class="flex-1 relative">
+        <x-topbar />
+        
         <!-- Contenido principal -->
-        <div class="flex-1 ml-60 p-6" style="background-image: url('{{ asset('img/INSTALACIONES.png') }}'); background-size: cover; background-position: center; min-height: 100vh;">
+        <div class="main-content">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                    <p class="text-gray-900 dark:text-gray-100">
-                        {{ __("You're logged in!") }}
-                    </p>
-                </div>
+                <!-- espacio para agregar algun contenido extra -->
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>
