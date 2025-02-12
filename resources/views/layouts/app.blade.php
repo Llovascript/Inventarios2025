@@ -13,24 +13,35 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/topbar.css', 'resources/js/topbar.js', 'resources/css/sidebar.css', 'resources/js/sidebar.js'])
 
         <!-- Estilos personalizados -->
         <style>
             body {
-                background-image: url('{{ asset('img/INSTALACIONES.png') }}');
+                background-image: url('{{ asset('/storage/img/INSTALACIONES.png') }}');
                 background-size: cover;
                 background-position: center;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
                 min-height: 100vh;
             }
+
         </style>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen">
-            <!-- Contenido principal -->
-            <main>
-                {{ $slot }}
-            </main>
+        <div class="content-wrapper">
+            <div class="flex min-h-screen">
+                
+                
+                <div class="flex-1 relative">
+                    
+                    
+                    <!-- Contenido principal -->
+                    <main class="main-content p-4">
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
         </div>
     </body>
 </html>
