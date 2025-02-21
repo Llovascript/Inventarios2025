@@ -15,11 +15,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname1');
             $table->string('lastname2');
-            $table->string('employee_number')->unique();
+            $table->string('codigo')->unique();
             $table->string('email')->unique();
-            $table->string('password'); // 
-            $table->string('rol');
-            $table->string('cargo');
+            $table->string('password');
+            $table->string('estatus');
+            $table->foreignId('id_role')->constrained('roles');
+            $table->foreignId('id_puesto')->constrained('puestos');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

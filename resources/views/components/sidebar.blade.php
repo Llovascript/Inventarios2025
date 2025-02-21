@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 @auth
-                @if (auth()->user()->role === 'super admin')
+                @if (auth()->user()->id_role == 1)
                 <li class="nav-item">
                     <a href="{{ route('register') }}" class="nav-link">
                         <span class="material-symbols-outlined">app_registration</span>

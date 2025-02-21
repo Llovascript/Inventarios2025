@@ -26,7 +26,7 @@
         <!-- Código empleado -->
         <div class="mt-4">
             <x-input-label for="employee_number" :value="__('Código empleado:')" />
-            <x-text-input id="employee_number" class="block mt-1 w-full" type="text" name="employee_number" :value="old('employee_number')" required autofocus autocomplete="employee_number" />
+            <x-text-input id="codigo" class="block mt-1 w-full" type="text" name="codigo" :value="old('codigo')" required autofocus autocomplete="codigo" />
             <x-input-error :messages="$errors->get('employee_number')" class="mt-2" />
         </div>
 
@@ -56,23 +56,37 @@
 
         <!-- Seleccionar Rol -->
         <div class="mt-4">
-            <x-input-label for="rol" :value="__('Rol')" />
-            <select id="rol" name="rol" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <x-input-label for="Rol" :value="__('Rol')" />
+            <select id="id_role" name="id_role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                 <option value="">Seleccionar Rol</option>
-                <option value="Administrador">Administrador</option>
+                @foreach ($roles as $rol)
+                    <option value="{{ $rol->id }}">{{$rol->nombre}}</option>
+                @endforeach
 
             </select>
-            <x-input-error :messages="$errors->get('rol')" class="mt-2" />
+            <x-input-error :messages="$errors->get('id_role')" class="mt-2" />
         </div>
 
         <!-- Seleccionar Cargo -->
         <div class="mt-4">
             <x-input-label for="cargo" :value="__('Cargo')" />
-            <select id="cargo" name="cargo" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <select id="id_puesto" name="id_puesto" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
                 <option value="">Seleccionar Cargo</option>
-                <option value="Laboratorio A">Laboratorio A</option>
+                @foreach ($puestos as $puesto)
+                    <option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
+                @endforeach
             </select>
-            <x-input-error :messages="$errors->get('cargo')" class="mt-2" />
+            <x-input-error :messages="$errors->get('id_puesto')" class="mt-2" />
+        </div>
+
+        <!-- Seleccionar Cargo -->
+        <div class="mt-4">
+            <x-input-label for="estatus" :value="__('Estatus')" />
+            <select id="estatus" name="estatus" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <x-input-error :messages="$errors->get('estatus')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
