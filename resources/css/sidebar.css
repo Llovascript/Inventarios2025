@@ -105,6 +105,7 @@
 .sidebar-nav .nav-item:hover > .nav-link{
     background: #eef2ff;
     color: #8c2437;
+    font-weight: bold;
 }
 
 .sidebar-nav .nav-link .nab-label{

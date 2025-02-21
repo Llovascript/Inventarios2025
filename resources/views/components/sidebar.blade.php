@@ -30,6 +30,16 @@
                         <span class="nab-label">Dashboard</span>
                     </a>
                 </li>
+                @auth
+                @if (auth()->user()->role === 'super admin')
+                <li class="nav-item">
+                    <a href="{{ route('register') }}" class="nav-link">
+                        <span class="material-symbols-outlined">app_registration</span>
+                        <span class="nab-label">Registro</span>
+                    </a>
+                </li>
+                @endif
+                @endauth
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <span class="material-symbols-outlined">calendar_today</span>
