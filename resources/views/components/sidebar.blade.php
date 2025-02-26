@@ -43,7 +43,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <span class="material-symbols-outlined">calendar_today</span>
-                        <span class="nab-label">Services</span>
+                        <span class="nab-label">prueba</span>
                     </a>
                 </li>
                 <li class="nav-item">
