@@ -33,7 +33,7 @@
                 @auth
                 @if (auth()->user()->id_role == 1)
                 <li class="nav-item">
-                    <a href="{{ route('register') }}" class="nav-link">
+                    <a href="{{ route('custom.register.form') }}" class="nav-link">
                         <span class="material-symbols-outlined">app_registration</span>
                         <span class="nab-label">Registro</span>
                     </a>
@@ -42,8 +42,8 @@
                 @endauth
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <span class="material-symbols-outlined">calendar_today</span>
-                        <span class="nab-label">prueba</span>
+                        <span class="material-symbols-outlined">package_2</span>
+                        <span class="nab-label">Factura y Articulos</span>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\CustomRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +31,8 @@ Route::middleware('auth')->group(function () {
 
 // Rutas de registro protegidas para solo super admin
 Route::middleware(['auth', 'superadmin'])->group(function () {
-    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('/register', [RegisteredUserController::class, 'store']);
+    Route::get('/custom-register', [CustomRegisterController::class, 'showRegistrationForm'])->name('custom.register.form');
+    Route::post('/custom-register', [CustomRegisterController::class, 'register'])->name('custom.register');
 });
 
 require __DIR__.'/auth.php';

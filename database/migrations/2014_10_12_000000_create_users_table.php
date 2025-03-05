@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('codigo')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('estatus');
+            $table->string('estatus')->default('activo');
             $table->foreignId('id_role')->constrained('roles');
             $table->foreignId('id_puesto')->constrained('puestos');
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable()->useCurrent();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -68,6 +68,6 @@ class Kernel extends HttpKernel
         //midlewares personalizados
 
         //permisos super admin
-        'superadmin' => \App\Http\Middleware\CheckSuperAdmin::class,
+        'superadmin' => \App\Http\Middleware\SuperadminMidleware::class,
     ];
 }

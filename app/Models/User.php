@@ -21,12 +21,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'lastname1',
         'lastname2',
-        'employee_number',
+        'codigo', // Asegúrate que este campo esté presente
         'email',
         'password',
-        'rol',
-        'cargo',
-        
+        'estatus',
+        'id_role',
+        'id_puesto',
+        'email_verified_at'
     ];
 
     /**
