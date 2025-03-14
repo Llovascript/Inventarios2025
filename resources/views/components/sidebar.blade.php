@@ -47,9 +47,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <span class="material-symbols-outlined">notifications</span>
-                        <span class="nab-label">Notifications</span>
+                    <a href="{{ route('ubicaciones.index') }}" class="nav-link">
+                        <span class="material-symbols-outlined">corporate_fare</span>
+                        <span class="nab-label">Ubicaciones</span>
                     </a>
                 </li>
                 <li class="nav-item">

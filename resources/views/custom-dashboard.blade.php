@@ -39,11 +39,7 @@
                 <!-- Contenido principal -->
                 <main class="p-4">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <!-- Aquí va el contenido específico del dashboard -->
-                        {{-- <div class="bg-white/50 backdrop-blur-sm overflow-hidden shadow-xl sm:rounded-lg p-6">
-                            <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                            <!-- Agrega aquí el contenido que necesites -->
-                        </div> --}}
+
                     </div>
                 </main>
             </div>

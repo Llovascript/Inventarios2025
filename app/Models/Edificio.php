@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Edificio extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'nombre'
+    ];
+
+    protected $table = 'edificios';
+
+    public function ubicaciones(){
+        return $this -> hasMany(Ubicacion::class, 'id_edificio');
+    }
+}
