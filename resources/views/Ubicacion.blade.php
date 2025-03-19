@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/topbar.js', 'resources/js/sidebar.js'])
     <style>
         body {
             background-image: url('/storage/img/INSTALACIONES.png');
@@ -20,10 +21,11 @@
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 20px;
-            margin-top: 20px;
             margin-bottom: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 140px;
         }
+
         .table-container {
             background-color: white;
             border-radius: 8px;
@@ -36,9 +38,6 @@
         .section.active {
             display: block;
         }
-        /* #listSection {
-            display: block;
-        } */
     </style>
 </head>
 <body>
@@ -177,6 +176,11 @@
                                                 <select class="form-select @error('id_planta') is-invalid @enderror" 
                                                         id="create_id_planta" name="id_planta" required>
                                                     <option value="">Seleccione primero un edificio</option>
+                                                    @foreach ($plantas as $planta)
+                                                        <option value="{{ $planta->id }}" {{ old('id_planta') == $planta->id ? 'selected' : ''}}>
+                                                            {{ $planta->nombre }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                                 @error('id_planta')
                                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -188,6 +192,11 @@
                                                 <select class="form-select @error('id_area') is-invalid @enderror" 
                                                         id="create_id_area" name="id_area" required>
                                                     <option value="">Seleccione primero una planta</option>
+                                                    @foreach ($areas as $area)
+                                                        <option value="{{ $area->id }}" {{ old('id_area') == $area->id ? 'selected' : ''}}>
+                                                            {{ $area->nombre }}
+                                                        </option>
+                                                    @endforeach
                                                 </select>
                                                 @error('id_area')
                                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -25,8 +25,10 @@ class UbicacionController extends Controller
         
         $ubicaciones = $query->latest()->paginate(10);
         $edificios = Edificio::all();
+        $plantas = Planta::all();
+        $areas = Area::all();
         
-        return view('Ubicacion', compact('ubicaciones', 'edificios', 'edificioFilter'));
+        return view('Ubicacion', compact('ubicaciones', 'edificios', 'edificioFilter','plantas', 'areas'));
     }
 
     public function create()
