@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PuestoSeeder::class,
             UserSeeder::class,
+            Areas::class,
+            Edificios::class,
+            Plantas::class,
         ]);
     }
 }
