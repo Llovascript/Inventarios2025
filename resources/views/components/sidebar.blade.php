@@ -40,12 +40,17 @@
                 </li>
                 @endif
                 @endauth
+
+                @auth
+                @if (auth()->user()->id_role == 1)
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <span class="material-symbols-outlined">package_2</span>
                         <span class="nab-label">Factura y Articulos</span>
                     </a>
                 </li>
+                @endif
+                @endauth
                 <li class="nav-item">
                     <a href="{{ route('ubicaciones.index') }}" class="nav-link">
                         <span class="material-symbols-outlined">corporate_fare</span>

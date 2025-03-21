@@ -2,40 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ubicacion;
-use App\Models\Area;
 use App\Models\Edificio;
 use App\Models\Planta;
+use App\Models\Area;
+use Illuminate\Http\Request;
 
 class UbicacionController extends Controller
 {
-    
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $edificioFilter = $request->input('edificio');
-        
-        $query = Ubicacion::with(['edificio', 'planta', 'area']);
-        
-        if ($edificioFilter) {
-            $query->whereHas('edificio', function ($q) use ($edificioFilter) {
-                $q->where('id', $edificioFilter);
-            });
-        }
-        
-        $ubicaciones = $query->latest()->paginate(10);
+        $ubicaciones = Ubicacion::with(['edificio', 'planta', 'area'])
+            ->paginate(10);
         $edificios = Edificio::all();
         $plantas = Planta::all();
         $areas = Area::all();
-        
-        return view('Ubicacion', compact('ubicaciones', 'edificios', 'edificioFilter','plantas', 'areas'));
+
+        return view('ubicacion', compact('ubicaciones', 'edificios', 'plantas', 'areas'));
     }
 
-    public function create()
-    {
-        return redirect()->route('ubicaciones.index');
-    }
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,88 +35,59 @@ class UbicacionController extends Controller
             'id_planta' => 'required|exists:plantas,id',
             'id_area' => 'required|exists:areas,id',
         ]);
-        
+
         Ubicacion::create($request->all());
-        
+
         return redirect()->route('ubicaciones.index')
             ->with('success', 'Ubicación creada exitosamente.');
     }
 
+    /**
+     * Display the specified resource.
+     */
     public function show(Ubicacion $ubicacion)
     {
-        // For AJAX requests, return JSON
-        if (request()->ajax()) {
-            $ubicacion->load(['edificio', 'planta', 'area']);
-            return response()->json($ubicacion);
-        }
-        
-        // For regular requests, redirect to index
-        return redirect()->route('ubicaciones.index');
+        return view('ubicaciones.show', compact('ubicacion'));
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Ubicacion $ubicacion)
     {
-        // For AJAX requests, return JSON
-        if (request()->ajax()) {
-            $edificios = Edificio::all();
-            $plantas = Planta::all();
-            $areas = Area::all();
-            
-            return response()->json([
-                'ubicacion' => $ubicacion,
-                'edificios' => $edificios,
-                'plantas' => $plantas,
-                'areas' => $areas
-            ]);
-        }
+        $edificios = Edificio::all();
+        $plantas = Planta::all();
+        $areas = Area::all();
         
-        // For regular requests, redirect to index
-        return redirect()->route('ubicaciones.index');
+        return view('ubicaciones.edit', compact('ubicacion', 'edificios', 'plantas', 'areas'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Ubicacion $ubicacion)
     {
-        $validated = $request->validate([
+        $request->validate([
             'descripcion' => 'required|string|max:255',
             'id_edificio' => 'required|exists:edificios,id',
             'id_planta' => 'required|exists:plantas,id',
             'id_area' => 'required|exists:areas,id',
         ]);
-        
-        $ubicacion->update($validated);
-        
-        // For AJAX requests, return JSON
-        if ($request->ajax()) {
-            return response()->json(['success' => true]);
-        }
-        
+
+        $ubicacion->update($request->all());
+
         return redirect()->route('ubicaciones.index')
             ->with('success', 'Ubicación actualizada exitosamente.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Ubicacion $ubicacion)
     {
         $ubicacion->delete();
-        
-        // For AJAX requests, return JSON
-        if (request()->ajax()) {
-            return response()->json(['success' => true]);
-        }
-        
+
         return redirect()->route('ubicaciones.index')
             ->with('success', 'Ubicación eliminada exitosamente.');
     }
-
-    public function getPlantasByEdificio(Request $request)
-    {
-        $plantas = Planta::where('id_edificio', $request->id_edificio)->get();
-        return response()->json($plantas);
-    }
-
-    public function getAreasByPlanta(Request $request)
-    {
-        $areas = Area::where('id_planta', $request->id_planta)->get();
-        return response()->json($areas);
-    }
-
 }
