@@ -14,7 +14,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/topbar.css', 'resources/js/topbar.js', 'resources/css/sidebar.css', 'resources/js/sidebar.js'])
-
+        
         <!-- Estilos personalizados -->
         <style>
             body {

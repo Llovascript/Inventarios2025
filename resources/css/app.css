@@ -8,6 +8,20 @@ body {
     background-attachment: fixed;
     background-position: center;
     min-height: 100vh;
+    @apply text-gray-900; /* Color de texto predeterminado para modo claro */
+}
+
+/* Estilos para el modo oscuro */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-image: url('/storage/img/INSTALACIONES_DARK.png'); /* Imagen de fondo para modo oscuro */
+        @apply text-gray-100; /* Color de texto para modo oscuro */
+    }
+}
+
+/* Estilos para campos de entrada */
+input[type="email"], input[type="password"] {
+    @apply bg-white text-gray-900 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:focus:border-indigo-600 dark:focus:ring-indigo-600;
 }
 
 /* Estilos para el contenido principal */
