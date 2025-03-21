@@ -10,6 +10,7 @@ body {
     min-height: 100vh;
 }
 
+
 /* Estilos para el contenido principal */
 main.col-md-9.ms-sm-auto.col-lg-10 {
     transition: margin-left 0.4s ease, width 0.4s ease;

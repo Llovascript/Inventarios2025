@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Oswald:wght@200..700&family=Poppins:wght@400;500;600;700&family=Sedan&display=swap');
 
+
 *{
     margin: 0;
     padding: 0;
@@ -66,6 +67,7 @@
 .sidebar-header .sidebar-toggler span{
     font-size: 1.75rem;
     transition: 0.6s ease;
+    color:#8c2437
 }
 
 .sidebar.collapsed .sidebar-toggler span{
@@ -90,7 +92,7 @@
 
 
 .sidebar-nav .nav-item .nav-link{
-    color: #fff;
+    color: #ffffff;
     display: flex;
     gap: 12px;
     white-space: nowrap;
@@ -135,7 +137,7 @@
         left: 20px;
         top: 20px;
         border: none;
-        color: #151830;
+        color: #f4f4f7;
         background: none;
         cursor: pointer;
     }
