@@ -172,7 +172,7 @@
 
                         <!-- Paginación -->
                         <div class="d-flex justify-content-end mt-3">
-                            {{ $ubicaciones->appends(['edificio' => request('edificio')])->links() }}
+                            {{ $ubicaciones->appends(['edificio' => request('edificio')])->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
