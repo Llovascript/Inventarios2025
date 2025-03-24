@@ -36,13 +36,13 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
     Route::post('/custom-register', [CustomRegisterController::class, 'register'])->name('custom.register');
 });
 
-// Agregar estas rutas a tu archivo routes/web.php
-Route::get('/ubicaciones', [App\Http\Controllers\UbicacionController::class, 'index'])->name('ubicaciones.index');
-Route::post('/ubicaciones', [App\Http\Controllers\UbicacionController::class, 'store'])->name('ubicaciones.store');
-Route::get('/ubicaciones/{ubicacion}', [App\Http\Controllers\UbicacionController::class, 'show'])->name('ubicaciones.show');
-Route::get('/ubicaciones/{ubicacion}/edit', [App\Http\Controllers\UbicacionController::class, 'edit'])->name('ubicaciones.edit');
-Route::put('/ubicaciones/{ubicacion}', [App\Http\Controllers\UbicacionController::class, 'update'])->name('ubicaciones.update');
-Route::delete('/ubicaciones/{ubicacion}', [App\Http\Controllers\UbicacionController::class, 'destroy'])->name('ubicaciones.destroy');
-
+// Rutas para ubicaciones
+Route::middleware('auth')->group(function () {  // Añadir auth para protección
+    Route::get('/ubicaciones', [UbicacionController::class, 'index'])->name('ubicaciones.index');
+    Route::post('/ubicaciones', [UbicacionController::class, 'store'])->name('ubicaciones.store');
+    Route::get('/ubicaciones/{ubicacion}/edit', [UbicacionController::class, 'edit'])->name('ubicaciones.edit');
+    Route::put('/ubicaciones/{ubicacion}', [UbicacionController::class, 'update'])->name('ubicaciones.update');
+    Route::delete('/ubicaciones/{ubicacion}', [UbicacionController::class, 'destroy'])->name('ubicaciones.destroy');
+});
 
 require __DIR__.'/auth.php';

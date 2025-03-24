@@ -52,10 +52,6 @@ class UbicacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ubicacion $ubicacion)
-    {
-        return view('ubicaciones.show', compact('ubicacion'));
-    }
 
     /**
      * Show the form for editing the specified resource.

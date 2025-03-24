@@ -11,6 +11,9 @@ class Ubicacion extends Model
 
     protected $table = 'ubicacion';
 
+    const CREATED_AT = 'fecha_creacion';
+    const UPDATED_AT = 'ultima_actualizacion';
+
     protected $fillable = [
         'descripcion',
         'id_edificio',

@@ -49,9 +49,8 @@
             font-size: 23px;
             vertical-align: middle;
         }
-        /* Colores normales */
-        .btn-outline-info .material-icons { color: #0db0d0; }
-        .btn-outline-warning .material-icons { color: #ffc107; }
+
+        .btn-outline-warning .material-icons { color: #0db0d0; }
         .btn-outline-danger .material-icons { color: #dc3545; }
 
         /* Transición base para todos los iconos */
@@ -59,19 +58,13 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Estilos individuales para cada tipo de botón */
-.btn-outline-info:hover .material-icons {
-    color: #044d8d !important; /* Gris medio */
-    transform: scale(1.2);
-}
-
 .btn-outline-warning:hover .material-icons {
-    color: #e5c303 !important; /* Gris oscuro */
+    color: #044d8d !important;
     transform: scale(1.2);
 }
 
 .btn-outline-danger:hover .material-icons {
-    color: #910202 !important; /* Gris azulado */
+    color: #910202 !important;
     transform: scale(1.2);
 }
 
@@ -135,31 +128,39 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>N°</th>
                                         <th>Descripción</th>
                                         <th>Edificio</th>
                                         <th>Planta</th>
                                         <th>Área</th>
+                                        <th>Fecha Creación</th>
+                                        <th>Última Actualización</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($ubicaciones as $ubicacion)
                                     <tr data-edificio="{{ $ubicacion->edificio->id ?? '' }}">
-                                        <td>{{ $ubicacion->id }}</td>
+                                        <td>{{ ($ubicaciones->currentPage() - 1) * $ubicaciones->perPage() + $loop->iteration }}</td>
                                         <td>{{ $ubicacion->descripcion }}</td>
                                         <td>{{ $ubicacion->edificio->nombre ?? 'N/A' }}</td>
                                         <td>{{ $ubicacion->planta->nombre ?? 'N/A' }}</td>
                                         <td>{{ $ubicacion->area->nombre ?? 'N/A' }}</td>
+                                        <td>{{ $ubicacion->fecha_creacion->format('d/m/Y H:i') }}</td>
+                                        <td>{{ $ubicacion->ultima_actualizacion->format('d/m/Y H:i') }}</td>
                                         <td class="text-center">
                                             <div class="action-buttons">
-                                                <button class="btn btn-sm btn-icon btn-outline-info btn-ver-detalle">
-                                                    <span class="material-icons">visibility</span>
-                                                </button>
-                                                <button class="btn btn-sm btn-icon btn-outline-warning">
+                                                <button class="btn btn-sm btn-icon btn-outline-warning edit-btn" 
+                                                        data-id="{{ $ubicacion->id }}"
+                                                        data-descripcion="{{ $ubicacion->descripcion }}"
+                                                        data-edificio="{{ $ubicacion->id_edificio }}"
+                                                        data-planta="{{ $ubicacion->id_planta }}"
+                                                        data-area="{{ $ubicacion->id_area }}">
                                                     <span class="material-icons">edit</span>
                                                 </button>
-                                                <button class="btn btn-sm btn-icon btn-outline-danger">
+                                                <button class="btn btn-sm btn-icon btn-outline-danger delete-btn" 
+                                                    data-id="{{ $ubicacion->id }}"
+                                                    data-descripcion="{{ $ubicacion->descripcion }}">
                                                     <span class="material-icons">delete</span>
                                                 </button>
                                             </div>
@@ -236,55 +237,78 @@
     </div>
 </div>
 
-<!-- Modal ver detalles ubicacion -->
-<div class="modal fade" id="modalVerDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+<!-- Modal confirmacion eliminar -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalDetalleLabel">Detalles de Ubicación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Campo</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Descripción</td>
-                                <td id="detalle-descripcion"></td>
-                            </tr>
-                            <tr>
-                                <td>Edificio</td>
-                                <td id="detalle-edificio"></td>
-                            </tr>
-                            <tr>
-                                <td>Planta</td>
-                                <td id="detalle-planta"></td>
-                            </tr>
-                            <tr>
-                                <td>Área</td>
-                                <td id="detalle-area"></td>
-                            </tr>
-                            <tr>
-                                <td>Fecha de Creación</td>
-                                <td id="detalle-fecha-creacion"></td>
-                            </tr>
-                            <tr>
-                                <td>Última Actualización</td>
-                                <td id="detalle-fecha-actualizacion"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                ¿Estás seguro de eliminar la ubicación: <strong id="ubicacionNombre"></strong>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Editar Ubicación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="editForm" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <input type="text" class="form-control" name="descripcion" id="editDescripcion" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Edificio</label>
+                        <select class="form-select" name="id_edificio" id="editEdificio" required>
+                            @foreach($edificios as $edificio)
+                            <option value="{{ $edificio->id }}">{{ $edificio->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Planta</label>
+                        <select class="form-select" name="id_planta" id="editPlanta" required>
+                            @foreach($plantas as $planta)
+                            <option value="{{ $planta->id }}">{{ $planta->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Área</label>
+                        <select class="form-select" name="id_area" id="editArea" required>
+                            @foreach($areas as $area)
+                            <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -311,32 +335,37 @@
         new bootstrap.Modal(document.getElementById('modalAgregarUbicacion')).show();
     });
 
-// Botones para ver detalles
-document.querySelectorAll('.btn-ver-detalle').forEach(button => {
-    button.addEventListener('click', function() {
-        // Obtener los datos de la fila
-        const row = this.closest('tr');
-        const descripcion = row.cells[1].textContent;
-        const edificio = row.cells[2].textContent;
-        const planta = row.cells[3].textContent;
-        const area = row.cells[4].textContent;
-        const fechaCreacion = row.dataset.createdAt || row.querySelector('.created-at')?.textContent || 'No disponible';
-        const fechaActualizacion = row.dataset.updatedAt || row.querySelector('.updated-at')?.textContent || 'No disponible';
-        
-        
-        // Llenar el modal con los datos
-        document.getElementById('detalle-descripcion').textContent = descripcion;
-        document.getElementById('detalle-edificio').textContent = edificio;
-        document.getElementById('detalle-planta').textContent = planta;
-        document.getElementById('detalle-area').textContent = area;
-        document.getElementById('detalle-fecha-creacion').textContent = fechaCreacion;
-        document.getElementById('detalle-fecha-actualizacion').textContent = fechaActualizacion;
-        
-        // Mostrar el modal
-        const modal = new bootstrap.Modal(document.getElementById('modalVerDetalle'));
-        modal.show();
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            const descripcion = this.dataset.descripcion;
+            
+            document.getElementById('ubicacionNombre').textContent = descripcion;
+            document.getElementById('deleteForm').action = `/ubicaciones/${id}`;
+            
+            new bootstrap.Modal(document.getElementById('confirmDeleteModal')).show();
+        });
     });
-});
+
+    // Edicion de ubicaciones
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            const descripcion = this.dataset.descripcion;
+            const edificioId = this.dataset.edificio;
+            const plantaId = this.dataset.planta;
+            const areaId = this.dataset.area;
+            
+            // Actualizar formulario
+            document.getElementById('editDescripcion').value = descripcion;
+            document.getElementById('editEdificio').value = edificioId;
+            document.getElementById('editPlanta').value = plantaId;
+            document.getElementById('editArea').value = areaId;
+            document.getElementById('editForm').action = `/ubicaciones/${id}`;
+            
+            new bootstrap.Modal(document.getElementById('editModal')).show();
+        });
+    });
 </script>
 </body>
 </html>

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('id_edificio')->constrained('edificios')->onDelete('cascade');
             $table->foreignId('id_planta')->constrained('plantas')->onDelete('cascade');
             $table->foreignId('id_area')->constrained('areas')->onDelete('cascade');
-            $table->timestamps();
+            $table->dateTime('fecha_creacion')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('ultima_actualizacion')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
