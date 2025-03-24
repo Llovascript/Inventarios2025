@@ -46,7 +46,7 @@
             transition: all 0.3s ease;
         }
         .btn-icon .material-icons {
-            font-size: 2rem;
+            font-size: 23px;
             vertical-align: middle;
         }
         /* Colores normales */
@@ -153,7 +153,7 @@
                                         <td>{{ $ubicacion->area->nombre ?? 'N/A' }}</td>
                                         <td class="text-center">
                                             <div class="action-buttons">
-                                                <button class="btn btn-sm btn-icon btn-outline-info">
+                                                <button class="btn btn-sm btn-icon btn-outline-info btn-ver-detalle">
                                                     <span class="material-icons">visibility</span>
                                                 </button>
                                                 <button class="btn btn-sm btn-icon btn-outline-warning">
@@ -236,6 +236,59 @@
     </div>
 </div>
 
+<!-- Modal ver detalles ubicacion -->
+<div class="modal fade" id="modalVerDetalle" tabindex="-1" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalDetalleLabel">Detalles de Ubicación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Campo</th>
+                                <th>Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Descripción</td>
+                                <td id="detalle-descripcion"></td>
+                            </tr>
+                            <tr>
+                                <td>Edificio</td>
+                                <td id="detalle-edificio"></td>
+                            </tr>
+                            <tr>
+                                <td>Planta</td>
+                                <td id="detalle-planta"></td>
+                            </tr>
+                            <tr>
+                                <td>Área</td>
+                                <td id="detalle-area"></td>
+                            </tr>
+                            <tr>
+                                <td>Fecha de Creación</td>
+                                <td id="detalle-fecha-creacion"></td>
+                            </tr>
+                            <tr>
+                                <td>Última Actualización</td>
+                                <td id="detalle-fecha-actualizacion"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -257,6 +310,33 @@
     document.getElementById('btnAgregarUbicacion').addEventListener('click', () => {
         new bootstrap.Modal(document.getElementById('modalAgregarUbicacion')).show();
     });
+
+// Botones para ver detalles
+document.querySelectorAll('.btn-ver-detalle').forEach(button => {
+    button.addEventListener('click', function() {
+        // Obtener los datos de la fila
+        const row = this.closest('tr');
+        const descripcion = row.cells[1].textContent;
+        const edificio = row.cells[2].textContent;
+        const planta = row.cells[3].textContent;
+        const area = row.cells[4].textContent;
+        const fechaCreacion = row.dataset.createdAt || row.querySelector('.created-at')?.textContent || 'No disponible';
+        const fechaActualizacion = row.dataset.updatedAt || row.querySelector('.updated-at')?.textContent || 'No disponible';
+        
+        
+        // Llenar el modal con los datos
+        document.getElementById('detalle-descripcion').textContent = descripcion;
+        document.getElementById('detalle-edificio').textContent = edificio;
+        document.getElementById('detalle-planta').textContent = planta;
+        document.getElementById('detalle-area').textContent = area;
+        document.getElementById('detalle-fecha-creacion').textContent = fechaCreacion;
+        document.getElementById('detalle-fecha-actualizacion').textContent = fechaActualizacion;
+        
+        // Mostrar el modal
+        const modal = new bootstrap.Modal(document.getElementById('modalVerDetalle'));
+        modal.show();
+    });
+});
 </script>
 </body>
 </html>
