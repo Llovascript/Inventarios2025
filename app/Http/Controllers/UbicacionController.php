@@ -13,10 +13,17 @@ class UbicacionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ubicaciones = Ubicacion::with(['edificio', 'planta', 'area'])
-            ->paginate(10);
+        $query = Ubicacion::with(['edificio', 'planta', 'area']);
+
+        if($request->has('edificio') && $request->edificio != 'todos'){
+            $query->whereHas('edificio', function($q) use ($request){
+                $q->where('id', $request->edificio);
+            });
+        }
+
+        $ubicaciones = $query->paginate(10);
         $edificios = Edificio::all();
         $plantas = Planta::all();
         $areas = Area::all();

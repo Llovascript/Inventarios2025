@@ -66,7 +66,7 @@
 }
 
 .btn-outline-warning:hover .material-icons {
-    color: #d2b304 !important; /* Gris oscuro */
+    color: #e5c303 !important; /* Gris oscuro */
     transform: scale(1.2);
 }
 
@@ -119,10 +119,12 @@
                     <!-- Filtrado por Edificio -->
                     <div class="filter-section">
                         <h5 class="mb-3">Filtrar por Edificio</h5>
-                        <select class="form-select form-select-sm" id="filtroEdificio">
-                            <option value="todos">Todos los edificios</option>
+                        <select class="form-select form-select-sm" id="filtroEdificio" name="edificio">
+                            <option value="todos" {{ request('edificio') == 'todos' ? 'selected' : '' }}>Todos los edificios</option>
                             @foreach($edificios as $edificio)
-                            <option value="{{ $edificio->id }}">{{ $edificio->nombre }}</option>
+                            <option value="{{ $edificio->id }}" {{ request('edificio') == $edificio->id ? 'selected' : '' }}>
+                                {{ $edificio->nombre }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -170,7 +172,7 @@
 
                         <!-- Paginación -->
                         <div class="d-flex justify-content-end mt-3">
-                            {{ $ubicaciones->onEachSide(1)->links() }}
+                            {{ $ubicaciones->appends(['edificio' => request('edificio')])->links() }}
                         </div>
                     </div>
                 </div>
@@ -239,15 +241,17 @@
 <script>
     // Activar filtrado
     document.getElementById('filtroEdificio').addEventListener('change', function() {
-        const value = this.value;
-        const rows = document.querySelectorAll('tbody tr');
-        
-        rows.forEach(row => {
-            row.style.display = (value === 'todos' || row.dataset.edificio === value) 
-                ? '' 
-                : 'none';
+            const value = this.value;
+            const url = new URL(window.location.href);
+            
+            if (value === 'todos') {
+                url.searchParams.delete('edificio');
+            } else {
+                url.searchParams.set('edificio', value);
+            }
+            
+            window.location.href = url.toString();
         });
-    });
 
     // Botón para abrir modal (usando Bootstrap)
     document.getElementById('btnAgregarUbicacion').addEventListener('click', () => {
