@@ -24,6 +24,7 @@ input[type="email"], input[type="password"] {
     @apply bg-white text-gray-900 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:focus:border-indigo-600 dark:focus:ring-indigo-600;
 }
 
+
 /* Estilos para el contenido principal */
 main.col-md-9.ms-sm-auto.col-lg-10 {
     transition: margin-left 0.4s ease, width 0.4s ease;
