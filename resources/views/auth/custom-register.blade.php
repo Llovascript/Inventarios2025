@@ -37,7 +37,11 @@
             margin-bottom: 2rem;
             text-shadow: 2px 2px 8px rgb(255, 250, 250);
             font-weight: 600;
+            position:static;
+            margin: 0 auto 1.5rem auto;
+            padding-top:0;
             text-align: center;
+
         }
 
         .register-container {
@@ -50,12 +54,17 @@
             box-shadow: var(--shadow);
             border: var(--border);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            padding-top: 4rem;
+            
         }
 
         .register-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+          
         }
+        
 
         .form-grid {
             display: grid;
@@ -128,6 +137,21 @@
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
         }
 
+        .form-grid {
+        justify-items: center; /* Centra los elementos de la grid horizontalmente */
+        }
+    
+        .form-group {
+        width: 90%; /* Controla el ancho de los grupos de formulario */
+        margin-left: 0; /* Elimina el margen izquierdo que desalineaba */
+        }
+    
+        @media (max-width: 768px) {
+          .form-group {
+            width: 100%; /* En móviles ocupa todo el ancho disponible */
+        }
+        }
+
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -143,11 +167,43 @@
                 padding: 2rem;
             }
         }
+        
+        .back-btn {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-btn:hover {
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-buttons {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+            
+            .back-btn, .submit-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1 class="register-title">Registro de Nuevo Usuario</h1>
     <div class="register-container">
+        <h1 class="register-title">Registro de Nuevo Usuario</h1> <!-- Movido aquí dentro --> 
         <form method="POST" action="{{ route('custom.register') }}">
             @csrf
             <div class="form-grid">
@@ -204,7 +260,15 @@
                     @error('id_puesto')<span class="error-message">{{ $message }}</span>@enderror
                 </div>
             </div>
+        
+
             <button type="submit" class="submit-btn">Registrar Usuario</button>
+            
+
+
+
+
+
         </form>
     </div>
 </body>
