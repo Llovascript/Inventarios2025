@@ -66,6 +66,7 @@
 .sidebar-header .sidebar-toggler span{
     font-size: 1.75rem;
     transition: 0.6s ease;
+    color: #151830;
 }
 
 .sidebar.collapsed .sidebar-toggler span{
