@@ -66,6 +66,7 @@
 .sidebar-header .sidebar-toggler span{
     font-size: 1.75rem;
     transition: 0.6s ease;
+    color: #151830;
 }
 
 .sidebar.collapsed .sidebar-toggler span{
@@ -90,7 +91,7 @@
 
 
 .sidebar-nav .nav-item .nav-link{
-    color: #fff;
+    color: #ffffff;
     display: flex;
     gap: 12px;
     white-space: nowrap;
