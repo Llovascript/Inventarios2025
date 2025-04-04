@@ -67,11 +67,7 @@
 .sidebar-header .sidebar-toggler span{
     font-size: 1.75rem;
     transition: 0.6s ease;
-<<<<<<< HEAD
     color: #151830;
-=======
-    color:#8c2437
->>>>>>> Itzel
 }
 
 .sidebar.collapsed .sidebar-toggler span{
