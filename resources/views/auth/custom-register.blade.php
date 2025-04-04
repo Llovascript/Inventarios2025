@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
     <style>
         :root {
-            --primary-color: #f11515;
-            --secondary-color: #c8130c;
-            --glass-bg: rgba(0, 0, 0, 0.1);
-            --text-color: #060678;
-            --input-bg: rgb(150, 50, 50);
-            --input-focus-bg: rgba(255, 255, 255, 0.625);
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --glass-bg: rgba(255, 255, 255, 0.5); /* Fondo más translúcido */
+            --text-color: #333; /* Texto oscuro para mejor contraste */
+            --input-bg: rgba(255, 255, 255, 0.7); /* Fondo de campos translúcido */
+            --input-focus-bg: rgba(255, 255, 255, 0.9); /* Fondo de campos al enfocar */
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            --border: 1px solid rgba(0, 0, 0, 0.3);
+            --border: 1px solid rgba(0, 0, 0, 0.1); /* Borde más oscuro */
         }
 
         body {
             margin: 0;
             padding: 0;
-            min-block-size: 100vh;
+            min-height: 100vh;
             background: url("{{ asset('storage/img/INSTALACIONES.png') }}") no-repeat center center fixed;
             background-size: cover;
             display: flex;
-            flex-direction: column; /* Cambiamos a columna para separar el título del formulario */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', sans-serif;
@@ -34,39 +34,35 @@
         .register-title {
             color: var(--text-color);
             font-size: 2.5rem;
-            margin-block-end: 2rem; /* Espacio entre el título y el formulario */
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 8px rgb(255, 250, 250);
             font-weight: 600;
+            position:static;
+            margin: 0 auto 1.5rem auto;
+            padding-top:0;
             text-align: center;
+
         }
 
         .register-container {
-            background: rgba(255, 255, 255, 0.9); /* Fondo blanco con 20% de opacidad */
-            backdrop-filter: blur(15px); /* Efecto de desenfoque */
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
             border-radius: 1.5rem;
-            padding: 2.5rem;
-            inline-size: 100%;
-            max-inline-size: 700px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(6, 6, 120, 0.743);
+            padding: 3rem;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: var(--shadow);
+            border: var(--border);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            padding-top: 4rem;
+            
         }
 
         .register-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .register-header {
-            text-align: center;
-            margin-block-end: 2rem;
-        }
-
-        .register-title {
-            color: rgb(255, 255, 255);
-            font-size: 2rem;
-            margin-block-end: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(6, 2, 50, 0.897);
+          
         }
         
 
@@ -74,45 +70,42 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2.5rem;
-            margin-block-end: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group {
-            margin-block-end: 2rem;
-            margin-inline-start: 1.5rem; /* Mueve los campos hacia la derecha */
+            margin-bottom: 2rem;
+            margin-left: 1.5rem;
         }
 
         .form-label {
             display: block;
-            color: #060678;
-            margin-block-end: 0.5rem;
-            font-weight: 500;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.793);
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600; /* Corregido el valor de font-weight */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
         }
 
-         /* Estilos para los campos de entrada y selects */
-         .form-input, .form-select {
+        .form-input, .form-select {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #060678; /* Borde azul oscuro */
-            border-radius: 0.5rem;
-            background: rgba(246, 242, 242, 0.986);
-            color: rgb(0, 0, 0);
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 0.75rem;
+            background: var(--input-bg);
+            color: var(--text-color);
             transition: all 0.3s ease;
             font-size: 1rem;
         }
 
-        .form-input:focus, .form-select:focus {
-            outline: none; /* Elimina el outline predeterminado */
-            border-color: #060678; /* Mantén el mismo color del borde */
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 3px rgba(6, 6, 120, 0.3); /* Sombra para resaltar */
+        .form-input::placeholder, .form-select::placeholder {
+            color: rgba(0, 0, 0, 0.6); /* Color del placeholder más oscuro */
         }
 
-        /* Estilos para los placeholders */
-        .form-input::placeholder {
-            color: rgba(8, 7, 7, 0.7); /* Color gris oscuro */
-            font-style: italic; /* Opcional: estilo cursivo */
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            background: var(--input-focus-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
 
         .submit-btn {
@@ -136,6 +129,7 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
+
         .error-message {
             color: #ff6b6b;
             font-size: 0.875rem;
@@ -173,14 +167,43 @@
                 padding: 2rem;
             }
         }
+        
+        .back-btn {
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-btn:hover {
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-buttons {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+            
+            .back-btn, .submit-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Título fuera del recuadro -->
-    <h1 class="register-title">Registro de Nuevo Usuario</h1>
-
-    <!-- Contenedor del formulario -->
     <div class="register-container">
+        <h1 class="register-title">Registro de Nuevo Usuario</h1> <!-- Movido aquí dentro --> 
         <form method="POST" action="{{ route('custom.register') }}">
             @csrf
             <div class="form-grid">
