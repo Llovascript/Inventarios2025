@@ -45,22 +45,27 @@
                 @if (auth()->user()->id_role == 1)
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <span class="material-symbols-outlined">package_2</span>
+                        <span class="material-symbols-outlined">inventory_2</span>
                         <span class="nab-label">Factura y Articulos</span>
                     </a>
                 </li>
                 @endif
                 @endauth
+
+                @auth
+                @if (auth()->user()->id_role == 1)
                 <li class="nav-item">
                     <a href="{{ route('ubicaciones.index') }}" class="nav-link">
                         <span class="material-symbols-outlined">corporate_fare</span>
                         <span class="nab-label">Ubicaciones</span>
                     </a>
                 </li>
+                @endif
+                @endauth
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <span class="material-symbols-outlined">local_library</span>
-                        <span class="nab-label">Resources</span>
+                    <a href="{{ route('proveedores') }}" class="nav-link">
+                        <span class="material-symbols-outlined">package_2</span>
+                        <span class="nab-label">Proveedores</span>
                     </a>
                 </li>
                 <li class="nav-item">

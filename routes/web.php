@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomRegisterController;
 use App\Http\Controllers\UbicacionController;
+use App\Http\Controllers\ProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +38,34 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
 });
 
 // Rutas para ubicaciones
-Route::middleware('auth')->group(function () {  // Añadir auth para protección
+Route::middleware(['auth', 'superadmin'])->group(function () {  // Añadir auth para protección
     Route::get('/ubicaciones', [UbicacionController::class, 'index'])->name('ubicaciones.index');
     Route::post('/ubicaciones', [UbicacionController::class, 'store'])->name('ubicaciones.store');
     Route::get('/ubicaciones/{ubicacion}/edit', [UbicacionController::class, 'edit'])->name('ubicaciones.edit');
     Route::put('/ubicaciones/{ubicacion}', [UbicacionController::class, 'update'])->name('ubicaciones.update');
     Route::delete('/ubicaciones/{ubicacion}', [UbicacionController::class, 'destroy'])->name('ubicaciones.destroy');
 });
+
+// Rutas proveedores
+// Proveedores
+Route::middleware('auth')->group(function () {
+    // Ruta principal (Listado)
+    Route::get('/proveedores', [ProveedorController::class, 'index'])
+         ->name('proveedores');
+
+    // Crear nuevo proveedor
+    Route::post('/proveedores', [ProveedorController::class, 'store'])
+         ->name('proveedores.store');
+
+    // Actualizar proveedor (Estatus)
+    Route::put('/proveedores/{proveedor}', [ProveedorController::class, 'update'])
+         ->name('proveedores.update');
+
+    // Eliminar proveedor
+    Route::delete('/proveedores/{proveedor}', [ProveedorController::class, 'destroy'])
+         ->name('proveedores.destroy');
+});
+
+// Rutas para Proveedores
 
 require __DIR__.'/auth.php';
